@@ -6,3 +6,5 @@
 amsvenv
 logs*
 logs/*
+.vscode
+venv    

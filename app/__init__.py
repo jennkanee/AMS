@@ -56,6 +56,29 @@ class App:
         # Dynamically generate and register the menu command
         dynamic_menu_command = DynamicMenuCommand(self.command_handler)
         self.command_handler.register_command(dynamic_menu_command)
+
+        logging.info("Application started. Type 'show_menu' to see the menu or 'exit' to exit.")
+        while True:
+            cmd_input = input(">>> ").strip()
+            if cmd_input.lower() == 'exit':
+                logging.info("Application exit.")
+                raise SystemExit("Exiting...")  # Raise SystemExit exception with the expected value
+            elif cmd_input == '':  # Check if the input is empty
+                self.command_handler.execute_command("show_menu")  # Execute the show_menu command
+            else:
+                cmd_name, *args = cmd_input.split()
+                if cmd_name not in self.command_handler.commands:
+                    logging.error(f"No such command: {cmd_name}")
+                    self.command_handler.execute_command("show_menu")  # Show menu if unknown command
+                else:
+                    try:
+                        self.command_handler.execute_command(cmd_name, *args)
+                    except Exception as e:
+                        logging.error(f"Error executing command: {e}")
+        self.load_plugins()
+        # Dynamically generate and register the menu command
+        dynamic_menu_command = DynamicMenuCommand(self.command_handler)
+        self.command_handler.register_command(dynamic_menu_command)
         
         logging.info("Application started. Type 'show_menu' to see the menu or 'exit' to exit.")
         try:

@@ -15,7 +15,7 @@ class MovieExpertChat(Command):
         load_dotenv()
         API_KEY = os.getenv('OPEN_AI_KEY')
         # you can try GPT4 but it costs a lot more money than the default 3.5
-        self.llm = ChatOpenAI(openai_api_key=API_KEY, model="gpt-4-0125-preview")  # Initialize once and reuse
+        self.llm = ChatOpenAI(openai_api_key=API_KEY, model="gpt-3.5-turbo-0125")  # Initialize once and reuse
         # This is default 3.5 chatGPT
         # self.llm = ChatOpenAI(openai_api_key=API_KEY)  # Initialize once and reuse
 
